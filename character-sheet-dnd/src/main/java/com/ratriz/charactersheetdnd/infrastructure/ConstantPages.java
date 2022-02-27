@@ -16,7 +16,7 @@ public final class ConstantPages {
 			ConstantPages.DIRECTION, ConstantPages.PROPERTIES.split(","));
 
 	public static final String PAGE_API = "/api";
-	public static final String PAGE_BACKGROUND = "/antecedente";
+	public static final String PAGE_BACKGROUND = "/background";
 	public static final String PAGE_BACKGROUND_TYPE = "/type";
 
 	public static final String PAGE_DTO = "/dto";
