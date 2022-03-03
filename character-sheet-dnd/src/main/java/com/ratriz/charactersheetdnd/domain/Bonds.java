@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.ratriz.charactersheetdnd.dto.BondsDTO;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
@@ -14,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Table
 @Entity
 @SuperBuilder
-public class Bonds extends AbstractEntity {
+public class Bonds extends AbstractEntity<Bonds> {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(optional = false)
@@ -22,4 +24,9 @@ public class Bonds extends AbstractEntity {
 
 	@Column(length = 2000)
 	private String description;
+
+	@Override
+	public BondsDTO toDTO() {
+		return new BondsDTO(this);
+	}
 }
