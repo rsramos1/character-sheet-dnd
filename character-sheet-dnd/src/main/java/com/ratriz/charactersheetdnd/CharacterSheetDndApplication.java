@@ -1,6 +1,6 @@
 package com.ratriz.charactersheetdnd;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,12 +23,12 @@ public class CharacterSheetDndApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		repository
-				.saveAll(Arrays.asList(Background.builder().name("Criminoso").description("Que cometeu crime").build(),
-						Background.builder().name("Artista").description("Que faz arte").build(),
-						Background.builder().name("Orfão").description("Que não tem pais").build(),
-						Background.builder().name("Artesão da Guilda").description("Que faz coisas pra guilda")
-								.inactive(true).build(),
-						Background.builder().name("Eremita").description("Que é um ermitão").inactive(true).build()));
+				.saveAll(List.of(
+						Background.of("Criminoso","Que cometeu crime"),
+						Background.of("Artista","Que faz arte"),
+						Background.of("Orfão","Que não tem pais"),
+						Background.of("Artesão da Guilda","Que faz coisas pra guilda"),
+						Background.of("Eremita","Que é um ermitão")));
 	}
 
 }

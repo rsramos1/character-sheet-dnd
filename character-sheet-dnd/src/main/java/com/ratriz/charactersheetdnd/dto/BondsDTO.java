@@ -12,7 +12,6 @@ public record BondsDTO(Long id, String name, BackgroundDTO background, String de
 
 	@Override
 	public Bonds toEntity() {
-		return Bonds.builder().id(id).name(name).background(background.toEntity()).description(description)
-				.inactive(inactive).build();
+		return Bonds.of(id, background.toEntity(), name, description, inactive);
 	}
 }

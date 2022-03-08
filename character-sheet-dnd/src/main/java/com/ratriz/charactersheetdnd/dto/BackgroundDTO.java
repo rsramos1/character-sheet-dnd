@@ -10,6 +10,6 @@ public record BackgroundDTO(Long id, String name, String description, boolean in
 
 	@Override
 	public Background toEntity() {
-		return Background.builder().id(id).name(name).description(description).inactive(inactive).build();
+		return Background.of(id, name, description, inactive);
 	}
 }

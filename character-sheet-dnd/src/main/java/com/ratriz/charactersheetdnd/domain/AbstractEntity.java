@@ -3,38 +3,29 @@ package com.ratriz.charactersheetdnd.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.ColumnDefault;
 
 import com.ratriz.charactersheetdnd.dto.IDTO;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
-@SuperBuilder
 @MappedSuperclass
-public abstract class AbstractEntity<T extends AbstractEntity<T>> implements Serializable {
+public abstract class AbstractEntity<T extends IDTO<? extends AbstractEntity<T, K>>, K> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@Column(nullable = false)
-	private String name;
-	@ColumnDefault("false")
-	private boolean inactive;
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	private LocalDateTime lastUpdate;
 
-	public abstract IDTO<T> toDTO();
+	public AbstractEntity() {
+		this.lastUpdate = LocalDateTime.now();
+	}
+
+	public abstract K getId();
+
+	public abstract T toDTO();
 }

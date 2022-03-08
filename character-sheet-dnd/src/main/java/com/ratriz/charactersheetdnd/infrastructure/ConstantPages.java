@@ -22,6 +22,7 @@ public final class ConstantPages {
 	public static final String PAGE_DTO = "/dto";
 	public static final String PAGE_LIST = "/list";
 	public static final String PAGE_SEARCH = "/search";
-	public static final String PAGE_SAVE = "/save";
+	public static final String PAGE_ACTION = "/action";
+	public static final String PAGE_CHANGE_STATUS = "/changeStatus";
 
 }
