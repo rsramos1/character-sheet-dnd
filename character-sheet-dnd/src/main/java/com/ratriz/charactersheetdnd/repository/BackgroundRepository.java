@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ratriz.charactersheetdnd.domain.Background;
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 
 @Repository
@@ -21,33 +22,42 @@ public interface BackgroundRepository extends JpaRepository<Background, Long> {
 	public Page<Background> findByInactive(boolean inactive, Pageable pageRequest);
 
 	public default Page<Background> find(
-			@Param("idNe") Long idNe,
-			@Param("nameLk") String nameLk,
-			@Param("inactive") Boolean inactive) {
+			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
+			@Param(ConstantFilter.NAME_LIKE) String nameLk,
+			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive) {
 		return find(idNe, nameLk, inactive, ConstantPages.PAGE_REQUEST);
 	}
 
 	@Query("SELECT DISTINCT BG FROM Background BG "
-			+ "WHERE (:idNe is null or BG.id != :idNe)"
-			+ "AND (:nameLk is null or LOWER(BG.name) LIKE %:nameLk%)"
-			+ "AND (:inactive is null or BG.inactive = :inactive)")
+			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or BG.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(BG.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
+			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or BG.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
 	public Page<Background> find(
-			@Param("idNe") Long idNe,
-			@Param("nameLk") String nameLk,
-			@Param("inactive") Boolean inactive,
+			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
+			@Param(ConstantFilter.NAME_LIKE) String nameLk,
+			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactiveEq,
 			Pageable pageRequest);
+
+	@Query("SELECT COUNT(BG) FROM Background BG "
+			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or BG.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(BG.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
+			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or BG.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
+	public Long countByFilter(
+			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
+			@Param(ConstantFilter.NAME_LIKE) String nameLk,
+			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive);
 	
 	public default Page<BackgroundDTO> findDto(
-			@Param("idNe") Long idNe,
-			@Param("nameLk") String nameLk,
-			@Param("inactive") Boolean inactive) {
+			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
+			@Param(ConstantFilter.NAME_LIKE) String nameLk,
+			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive) {
 		return find(idNe, nameLk, inactive).map(obj -> obj.toDTO());
 	}
 
 	public default Page<BackgroundDTO> findDto(
-			@Param("idNe") Long idNe,
-			@Param("nameLk") String nameLk,
-			@Param("inactive") Boolean inactive,
+			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
+			@Param(ConstantFilter.NAME_LIKE) String nameLk,
+			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive,
 			Pageable pageRequest) {
 		return find(idNe, nameLk, inactive, pageRequest).map(obj -> obj.toDTO());
 	}

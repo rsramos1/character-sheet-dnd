@@ -1,16 +1,18 @@
 package com.ratriz.charactersheetdnd.service;
 
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.ratriz.charactersheetdnd.domain.Background;
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
-import com.ratriz.charactersheetdnd.exception.ObjectNotFoundException;
+import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
@@ -27,16 +29,25 @@ public class BackgroundService extends AbstractService<Background, Long> {
 
 	public Page<BackgroundDTO> findDto(Map<String, String> params, Pageable pageRequest) {
 		return repository.findDto(
-				ParseUtil.parseLong(params.get("idNe")),
-				params.get("nameLk"),
-				ParseUtil.parseBoolean(params.get("inactive")),
+				ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+				params.get(ConstantFilter.NAME_LIKE),
+				ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS)),
 				pageRequest);
 	}
-	
+
 	public BackgroundDTO changeStatus(Long id) {
-		Background background = findById(id);
-		background.setInactive(!background.isInactive());
-		return repository.save(background).toDTO();
+		return repository.save(findById(id).changeStatus()).toDTO();
+	}
+	
+	public BackgroundDTO findOneRandom(Map<String, String> params) {
+		return findDto(params,
+				PageRequest.of(new Random().nextInt(
+					repository.countByFilter(
+						ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+						params.get(ConstantFilter.NAME_LIKE),
+						ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS))
+					).intValue()
+				), 1)).getContent().parallelStream().findFirst().orElse(null);
 	}
 
 }

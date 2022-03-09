@@ -24,5 +24,6 @@ public final class ConstantPages {
 	public static final String PAGE_SEARCH = "/search";
 	public static final String PAGE_ACTION = "/action";
 	public static final String PAGE_CHANGE_STATUS = "/changeStatus";
+	public static final String PAGE_RANDOM = "/random";
 
 }

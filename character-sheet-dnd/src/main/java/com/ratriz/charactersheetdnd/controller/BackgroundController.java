@@ -63,4 +63,10 @@ public class BackgroundController {
 		return ResponseEntity.ok(service.delete(id).toDTO());
 	}
 
+	@ResponseBody
+	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_RANDOM + ConstantPages.PAGE_SEARCH)
+	public ResponseEntity<BackgroundDTO> findOneRandom(@RequestParam Map<String, String> params, Pageable pageRequest) {
+		return ResponseEntity.ok(service.findOneRandom(params));
+	}
+
 }

@@ -64,5 +64,10 @@ public class Background extends AbstractEntity<BackgroundDTO, Long> {
 	public static Background of(Long id, String name, String description, boolean inactive) {
 		return new Background(id, name, description, inactive, List.of());
 	}
+	
+	public Background changeStatus() {
+		setInactive(!inactive);
+		return this;
+	}
 
 }
