@@ -10,38 +10,40 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.domain.Background;
-import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.domain.Bonds;
+import com.ratriz.charactersheetdnd.dto.BondsDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
-import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
+import com.ratriz.charactersheetdnd.repository.BondsRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
 @Service
-public class BackgroundService extends AbstractService<Background, Long> {
+public class BondsService extends AbstractService<Bonds, Long> {
 
 	@Autowired
-	private BackgroundRepository repository;
+	private BondsRepository repository;
 
 	@Override
-	protected JpaRepository<Background, Long> getRepository() {
+	protected JpaRepository<Bonds, Long> getRepository() {
 		return this.repository;
 	}
 
 	@Override
-	public Page<BackgroundDTO> findDto(Map<String, String> params, Pageable pageRequest) {
+	public Page<BondsDTO> findDto(Map<String, String> params, Pageable pageRequest) {
 		return repository.findDto(
 				ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+				ParseUtil.parseLong(params.get(ConstantFilter.BACKGROUND_ID_EQUALS)),
 				params.get(ConstantFilter.NAME_LIKE),
 				ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS)),
 				pageRequest);
 	}
-	
+
 	@Override
-	public BackgroundDTO findOneRandom(Map<String, String> params) {
+	public BondsDTO findOneRandom(Map<String, String> params) {
 		return findDto(params,
 				PageRequest.of(new Random().nextInt(
 					repository.countByFilter(
 						ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+						ParseUtil.parseLong(params.get(ConstantFilter.BACKGROUND_ID_EQUALS)),
 						params.get(ConstantFilter.NAME_LIKE),
 						ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS))
 					).intValue()

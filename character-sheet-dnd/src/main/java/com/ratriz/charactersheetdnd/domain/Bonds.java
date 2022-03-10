@@ -8,12 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import com.ratriz.charactersheetdnd.dto.BondsDTO;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,8 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Bonds extends AbstractEntity<BondsDTO, Long> {
+public class Bonds extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -40,24 +35,23 @@ public class Bonds extends AbstractEntity<BondsDTO, Long> {
 	@Column(length = 2000)
 	private String description;
 
-	@ColumnDefault("false")
-	private boolean inactive;
-
 	@Override
 	public Long getId() {
 		return key;
 	}
 
+	public Bonds(BondsDTO dto) {
+		super(dto.inactive());
+		this.key = dto.key();
+		this.background = dto.background().toEntity();
+		this.name = dto.name();
+		this.description = dto.description();
+	}
+
 	@Override
+	@SuppressWarnings("unchecked")
 	public BondsDTO toDTO() {
 		return new BondsDTO(this);
 	}
 
-	public static Bonds of(String name, Background background, String description) {
-		return of(null, background, name, description, false);
-	}
-
-	public static Bonds of(Long id, Background background, String name, String description, boolean inactive) {
-		return new Bonds(id, background, name, description, inactive);
-	}
 }

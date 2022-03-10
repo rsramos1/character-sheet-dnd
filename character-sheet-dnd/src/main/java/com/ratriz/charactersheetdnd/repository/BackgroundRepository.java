@@ -15,13 +15,13 @@ import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 @Repository
 public interface BackgroundRepository extends JpaRepository<Background, Long> {
 
-	public default Page<Background> findByInactive(boolean inactive) {
+	default Page<Background> findByInactive(boolean inactive) {
 		return findByInactive(inactive, ConstantPages.PAGE_REQUEST);
 	}
 
 	public Page<Background> findByInactive(boolean inactive, Pageable pageRequest);
 
-	public default Page<Background> find(
+	default Page<Background> find(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive) {
@@ -47,14 +47,14 @@ public interface BackgroundRepository extends JpaRepository<Background, Long> {
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive);
 	
-	public default Page<BackgroundDTO> findDto(
+	default Page<BackgroundDTO> findDto(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive) {
 		return find(idNe, nameLk, inactive).map(obj -> obj.toDTO());
 	}
 
-	public default Page<BackgroundDTO> findDto(
+	default Page<BackgroundDTO> findDto(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive,

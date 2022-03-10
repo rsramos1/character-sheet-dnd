@@ -1,5 +1,8 @@
 package com.ratriz.charactersheetdnd.service;
 
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,9 +11,13 @@ import com.ratriz.charactersheetdnd.domain.AbstractEntity;
 import com.ratriz.charactersheetdnd.dto.IDTO;
 import com.ratriz.charactersheetdnd.exception.ObjectNotFoundException;
 
-public abstract class AbstractService<T extends AbstractEntity<? extends IDTO<T>, K>, K> {
+public abstract class AbstractService<T extends AbstractEntity<K>, K> {
 
 	protected abstract JpaRepository<T, K> getRepository();
+
+	public abstract Page<? extends IDTO<T>> findDto(Map<String, String> params, Pageable pageRequest);
+
+	public abstract IDTO<T> findOneRandom(Map<String, String> params);
 
 	public Page<T> findAll(Pageable pageRequest) {
 		return getRepository().findAll(pageRequest);
@@ -55,6 +62,13 @@ public abstract class AbstractService<T extends AbstractEntity<? extends IDTO<T>
 	@SuppressWarnings("unchecked")
 	public <U extends IDTO<T>> U findByIdDto(K id) {
 		return (U) findById(id).toDTO();
+	}
+
+	public IDTO<T> changeStatus(K id) {
+		return getRepository().save(Optional.of(findById(id)).map(obj -> {
+			obj.changeStatus();
+			return obj;
+		}).get()).toDTO();
 	}
 
 }
