@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.ratriz.charactersheetdnd.domain.Background;
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.dto.BondsDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
+import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
@@ -22,9 +24,17 @@ public class BackgroundService extends AbstractService<Background, Long> {
 	@Autowired
 	private BackgroundRepository repository;
 
+	@Autowired
+	private BondsService bondsService;
+
 	@Override
 	protected JpaRepository<Background, Long> getRepository() {
 		return this.repository;
+	}
+	
+	@Override
+	public Page<BackgroundDTO> findDto(Map<String, String> params) {
+		return findDto(params, ConstantPages.PAGE_REQUEST);
 	}
 
 	@Override
@@ -46,6 +56,11 @@ public class BackgroundService extends AbstractService<Background, Long> {
 						ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS))
 					).intValue()
 				), 1)).getContent().parallelStream().findFirst().orElse(null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Page<BondsDTO> findBondsDtoById(Long id) {
+		return (Page<BondsDTO>) bondsService.findDto(Map.of(ConstantFilter.BACKGROUND_ID_EQUALS, id.toString()));
 	}
 
 }

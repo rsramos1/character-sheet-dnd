@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ratriz.charactersheetdnd.domain.AbstractEntity;
 import com.ratriz.charactersheetdnd.dto.IDTO;
 import com.ratriz.charactersheetdnd.exception.ObjectNotFoundException;
+import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 
 public abstract class AbstractService<T extends AbstractEntity<K>, K> {
 
@@ -26,6 +27,10 @@ public abstract class AbstractService<T extends AbstractEntity<K>, K> {
 	@SuppressWarnings("unchecked")
 	public <U extends IDTO<T>> Page<U> findAllDto(Pageable pageRequest) {
 		return findAll(pageRequest).map(obj -> (U) obj.toDTO());
+	}
+	
+	public Page<? extends IDTO<T>> findDto(Map<String, String> params) {
+		return findDto(params, ConstantPages.PAGE_REQUEST);
 	}
 
 	@SuppressWarnings("unchecked")

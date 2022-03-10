@@ -8,13 +8,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ratriz.charactersheetdnd.domain.Background;
+import com.ratriz.charactersheetdnd.domain.Bonds;
 import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
+import com.ratriz.charactersheetdnd.repository.BondsRepository;
 
 @SpringBootApplication
 public class CharacterSheetDndApplication implements CommandLineRunner {
 
 	@Autowired
-	private BackgroundRepository repository;
+	private BackgroundRepository backgroundsRepository;
+
+	@Autowired
+	private BondsRepository bondsRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CharacterSheetDndApplication.class, args);
@@ -22,7 +27,15 @@ public class CharacterSheetDndApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		repository.saveAll(getBackgroudns());
+		List<Background> backgrounds = getBackgroudns();
+		backgroundsRepository.saveAll(backgrounds);
+		
+		Bonds b1 = new Bonds();
+		b1.setBackground(backgrounds.get(0));
+		b1.setName("teste");
+		b1.setDescription("testando");
+		
+		bondsRepository.save(b1);
 	}
 
 	public List<Background> getBackgroudns() {
@@ -45,7 +58,7 @@ public class CharacterSheetDndApplication implements CommandLineRunner {
 		Background eremita = new Background();
 		eremita.setName("Eremita");
 		eremita.setDescription("Que é um ermitão");
-
+		
 		return List.of(criminoso, artista, orfao, artesaoDaGuilda, eremita);
 	}
 
