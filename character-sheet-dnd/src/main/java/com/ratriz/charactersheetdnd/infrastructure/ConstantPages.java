@@ -17,7 +17,10 @@ public final class ConstantPages {
 
 	public static final String PAGE_API = "/api";
 	public static final String PAGE_BACKGROUND = "/background";
+	public static final String PAGE_PERSONALITY_TRAITS = "/personality-traits";
+	public static final String PAGE_IDEALS = "/ideals";
 	public static final String PAGE_BONDS = "/bonds";
+	public static final String PAGE_FLAWS = "/flaws";
 	public static final String PAGE_BACKGROUND_TYPE = "/background-type";
 
 	public static final String PAGE_DTO = "/dto";
