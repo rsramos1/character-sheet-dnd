@@ -35,6 +35,11 @@ public class Background extends AbstractEntity<Long> {
 	public Long getId() {
 		return key;
 	}
+	
+	@Override
+	public void setId(Long id) {
+		this.key = id;
+	}
 
 	public Background(BackgroundDTO dto) {
 		super(dto.inactive());

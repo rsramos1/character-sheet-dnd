@@ -39,6 +39,11 @@ public class Bonds extends AbstractEntity<Long> {
 	public Long getId() {
 		return key;
 	}
+	
+	@Override
+	public void setId(Long id) {
+		this.key = id;
+	}
 
 	public Bonds(BondsDTO dto) {
 		super(dto.inactive());

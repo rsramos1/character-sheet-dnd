@@ -28,22 +28,25 @@ public abstract class AbstractService<T extends AbstractEntity<K>, K> {
 	public <U extends IDTO<T>> Page<U> findAllDto(Pageable pageRequest) {
 		return findAll(pageRequest).map(obj -> (U) obj.toDTO());
 	}
-	
+
 	public Page<? extends IDTO<T>> findDto(Map<String, String> params) {
 		return findDto(params, ConstantPages.PAGE_REQUEST);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <U extends IDTO<T>> U save(IDTO<T> dto) {
+	public <U extends IDTO<T>> U insert(IDTO<T> dto) {
 		return (U) save(dto.toEntity()).toDTO();
 	}
 
 	@SuppressWarnings("unchecked")
-	public <U extends IDTO<T>> U save(K id, IDTO<T> dto) {
+	public <U extends IDTO<T>> U update(K id, IDTO<T> dto) {
 		if (!getRepository().existsById(id)) {
 			throw new ObjectNotFoundException();
 		}
-		return (U) save(dto.toEntity()).toDTO();
+		return (U) save(Optional.of(dto.toEntity()).map(entity -> {
+			entity.setId(id);
+			return entity;
+		}).get()).toDTO();
 	}
 
 	public T save(T entity) {

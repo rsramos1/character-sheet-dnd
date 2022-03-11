@@ -35,6 +35,8 @@ public abstract class AbstractEntity<K> implements Serializable {
 	}
 
 	public abstract K getId();
+	
+	public abstract void setId(K id);
 
 	public abstract <U extends IDTO<? extends AbstractEntity<K>>> U toDTO();
 

@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,26 +43,14 @@ public abstract class AbstractController<T extends AbstractEntity<K>, K> {
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
-	public ResponseEntity<IDTO<T>> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id, @RequestBody IDTO<T> dto) {
-		return ResponseEntity.ok(getService().save(id, dto));
-	}
-
-	@ResponseBody
 	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_CHANGE_STATUS + ConstantPages.PAGE_ATTRIBUTE_ID)
 	public ResponseEntity<IDTO<T>> changeStatus(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
 		return ResponseEntity.ok(getService().changeStatus(id));
 	}
 
 	@ResponseBody
-	@PostMapping(path = ConstantPages.PAGE_ACTION)
-	public ResponseEntity<IDTO<T>> insert(@RequestBody IDTO<T> dto) {
-		return ResponseEntity.ok(getService().save(dto));
-	}
-
-	@ResponseBody
 	@DeleteMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
-	public ResponseEntity<IDTO<T>> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
+	public ResponseEntity<IDTO<T>> delete(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
 		return ResponseEntity.ok(getService().delete(id).toDTO());
 	}
 

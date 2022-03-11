@@ -2,11 +2,23 @@ package com.ratriz.charactersheetdnd.dto;
 
 import com.ratriz.charactersheetdnd.domain.Bonds;
 
-public record BondsDTO(Long key, String name, BackgroundDTO background, String description, boolean inactive)
+public record BondsDTO(Long key, BackgroundDTO background, String name, String description, boolean inactive)
 		implements IDTO<Bonds> {
 
+	public BondsDTO(Long key) {
+		this(null, null, null);
+	}
+
+	public BondsDTO(BackgroundDTO background, String name, String description) {
+		this(null, background, name, description);
+	}
+	
+	public BondsDTO(Long key, BackgroundDTO background, String name, String description) {
+		this(key, background, name, description, false);
+	}
+	
 	public BondsDTO(Bonds entity) {
-		this(entity.getKey(), entity.getName(), entity.getBackground().toDTO(), entity.getDescription(),
+		this(entity.getKey(), entity.getBackground().toDTO(), entity.getName(), entity.getDescription(),
 				entity.isInactive());
 	}
 
