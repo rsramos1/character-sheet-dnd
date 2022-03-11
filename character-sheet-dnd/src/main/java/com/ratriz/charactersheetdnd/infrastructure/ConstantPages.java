@@ -16,12 +16,22 @@ public final class ConstantPages {
 			ConstantPages.DIRECTION, ConstantPages.PROPERTIES.split(","));
 
 	public static final String PAGE_API = "/api";
+	public static final String PAGE_ALIGNMENT = "/alignment";
 	public static final String PAGE_BACKGROUND = "/background";
-	public static final String PAGE_PERSONALITY_TRAITS = "/personality-traits";
-	public static final String PAGE_IDEALS = "/ideals";
-	public static final String PAGE_BONDS = "/bonds";
-	public static final String PAGE_FLAWS = "/flaws";
 	public static final String PAGE_BACKGROUND_TYPE = "/background-type";
+	public static final String PAGE_BONDS = "/bonds";
+	public static final String PAGE_CLASS = "/class";
+	public static final String PAGE_EYES = "/eyes";
+	public static final String PAGE_FAMILY_NAME = "/family-name";
+	public static final String PAGE_FLAWS = "/flaws";
+	public static final String PAGE_HAIR = "/hair";
+	public static final String PAGE_IDEALS = "/ideals";
+	public static final String PAGE_NAME = "/name";
+	public static final String PAGE_PERSONALITY_TRAITS = "/personality-traits";
+	public static final String PAGE_RACE = "/race";
+	public static final String PAGE_SKIN = "/skin";
+	public static final String PAGE_SUBCLASS = "/subclass";
+	public static final String PAGE_SUBRACE = "/subrace";
 
 	public static final String PAGE_DTO = "/dto";
 	public static final String PAGE_LIST = "/list";

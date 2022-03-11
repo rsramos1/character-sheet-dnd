@@ -10,44 +10,40 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.domain.Background;
-import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.domain.Subclass;
+import com.ratriz.charactersheetdnd.dto.SubclassDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
-import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
-import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
+import com.ratriz.charactersheetdnd.repository.SubclassRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
 @Service
-public class BackgroundService extends AbstractService<Background, Long> {
+public class SubclassService extends AbstractService<Subclass, Long> {
 
 	@Autowired
-	private BackgroundRepository repository;
-	
+	private SubclassRepository repository;
+
 	@Override
-	protected JpaRepository<Background, Long> getRepository() {
+	protected JpaRepository<Subclass, Long> getRepository() {
 		return this.repository;
-	}
-	
-	@Override
-	public Page<BackgroundDTO> findDto(Map<String, String> params) {
-		return findDto(params, ConstantPages.PAGE_REQUEST);
 	}
 
 	@Override
-	public Page<BackgroundDTO> findDto(Map<String, String> params, Pageable pageRequest) {
+	public Page<SubclassDTO> findDto(Map<String, String> params, Pageable pageRequest) {
 		return repository.findDto(
 				ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+				ParseUtil.parseLong(params.get(ConstantFilter.CHARACTER_CLASS_ID_EQUALS)),
 				params.get(ConstantFilter.NAME_LIKE),
 				ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS)),
 				pageRequest);
 	}
-	
+
 	@Override
-	public BackgroundDTO findOneRandom(Map<String, String> params) {
+	public SubclassDTO findOneRandom(Map<String, String> params) {
 		return findDto(params,
 				PageRequest.of(new Random().nextInt(
 					repository.countByFilter(
 						ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
+						ParseUtil.parseLong(params.get(ConstantFilter.CHARACTER_CLASS_ID_EQUALS)),
 						params.get(ConstantFilter.NAME_LIKE),
 						ParseUtil.parseBoolean(params.get(ConstantFilter.INACTIVE_EQUALS))
 					).intValue()

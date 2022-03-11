@@ -10,31 +10,31 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.domain.Background;
-import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.domain.CharacterClass;
+import com.ratriz.charactersheetdnd.dto.CharacterClassDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
-import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
+import com.ratriz.charactersheetdnd.repository.CharacterClassRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
 @Service
-public class BackgroundService extends AbstractService<Background, Long> {
+public class CharacterClassService extends AbstractService<CharacterClass, Long> {
 
 	@Autowired
-	private BackgroundRepository repository;
-	
+	private CharacterClassRepository repository;
+
 	@Override
-	protected JpaRepository<Background, Long> getRepository() {
+	protected JpaRepository<CharacterClass, Long> getRepository() {
 		return this.repository;
 	}
 	
 	@Override
-	public Page<BackgroundDTO> findDto(Map<String, String> params) {
+	public Page<CharacterClassDTO> findDto(Map<String, String> params) {
 		return findDto(params, ConstantPages.PAGE_REQUEST);
 	}
 
 	@Override
-	public Page<BackgroundDTO> findDto(Map<String, String> params, Pageable pageRequest) {
+	public Page<CharacterClassDTO> findDto(Map<String, String> params, Pageable pageRequest) {
 		return repository.findDto(
 				ParseUtil.parseLong(params.get(ConstantFilter.ID_NOT_EQUALS)),
 				params.get(ConstantFilter.NAME_LIKE),
@@ -43,7 +43,7 @@ public class BackgroundService extends AbstractService<Background, Long> {
 	}
 	
 	@Override
-	public BackgroundDTO findOneRandom(Map<String, String> params) {
+	public CharacterClassDTO findOneRandom(Map<String, String> params) {
 		return findDto(params,
 				PageRequest.of(new Random().nextInt(
 					repository.countByFilter(
@@ -53,5 +53,5 @@ public class BackgroundService extends AbstractService<Background, Long> {
 					).intValue()
 				), 1)).getContent().parallelStream().findFirst().orElse(null);
 	}
-
+	
 }

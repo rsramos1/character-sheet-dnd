@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ratriz.charactersheetdnd.domain.Background;
-import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.domain.Subclass;
+import com.ratriz.charactersheetdnd.dto.SubclassDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
-import com.ratriz.charactersheetdnd.service.BackgroundService;
+import com.ratriz.charactersheetdnd.service.SubclassService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_BACKGROUND)
-public class BackgroundController extends AbstractController<Background, Long> {
+@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_SUBCLASS)
+public class SubclassController extends AbstractController<Subclass, Long> {
 
 	@Autowired
-	private BackgroundService service;
+	private SubclassService service;
 
 	@Override
-	protected AbstractService<Background, Long> getService() {
+	protected AbstractService<Subclass, Long> getService() {
 		return service;
 	}
 
 	@ResponseBody
 	@PostMapping(path = ConstantPages.PAGE_ACTION)
-	public ResponseEntity<BackgroundDTO> insert(@RequestBody BackgroundDTO dto) {
+	public ResponseEntity<SubclassDTO> insert(@RequestBody SubclassDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
 	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
-	public ResponseEntity<BackgroundDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id,
-			@RequestBody BackgroundDTO dto) {
+	public ResponseEntity<SubclassDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id,
+			@RequestBody SubclassDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));
 	}
 

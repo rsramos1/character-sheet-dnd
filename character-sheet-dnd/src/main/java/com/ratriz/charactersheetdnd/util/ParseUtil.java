@@ -2,6 +2,8 @@ package com.ratriz.charactersheetdnd.util;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ParseUtil {
 
 	public static Long parseLong(String value) {
@@ -30,6 +32,17 @@ public class ParseUtil {
 				return defaultValue;
 			}
 		}).orElse(defaultValue);
+	}
+
+	public static Character parseCharacter(String value) {
+		return parseCharacterOrDefault(value, null);
+	}
+
+	public static Character parseCharacterOrDefault(String value, Character defaultValue) {
+		if (StringUtils.length(value) != 1) {
+			throw new IllegalArgumentException(); // TODO create exception
+		}
+		return value.charAt(0);
 	}
 
 	public static Boolean parseBoolean(String value) {
