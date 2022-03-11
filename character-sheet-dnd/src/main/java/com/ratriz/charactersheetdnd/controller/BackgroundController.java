@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ratriz.charactersheetdnd.domain.Background;
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
 import com.ratriz.charactersheetdnd.dto.BondsDTO;
+import com.ratriz.charactersheetdnd.dto.FlawsDTO;
+import com.ratriz.charactersheetdnd.dto.IdealsDTO;
+import com.ratriz.charactersheetdnd.dto.PersonalityTraitsDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.BackgroundService;
@@ -45,9 +48,27 @@ public class BackgroundController extends AbstractController<Background, Long> {
 	}
 
 	@ResponseBody
+	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_ATTRIBUTE_ID + ConstantPages.PAGE_PERSONALITY_TRAITS)
+	public ResponseEntity<Page<PersonalityTraitsDTO>> findPersonalityTraitsDtoById(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id) {
+		return ResponseEntity.ok(service.findPersonalityTraitsDtoById(id));
+	}
+	
+	@ResponseBody
+	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_ATTRIBUTE_ID + ConstantPages.PAGE_IDEALS)
+	public ResponseEntity<Page<IdealsDTO>> findIdealsDtoById(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id) {
+		return ResponseEntity.ok(service.findIdealsDtoById(id));
+	}
+	
+	@ResponseBody
 	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_ATTRIBUTE_ID + ConstantPages.PAGE_BONDS)
 	public ResponseEntity<Page<BondsDTO>> findBondsDtoById(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id) {
 		return ResponseEntity.ok(service.findBondsDtoById(id));
+	}
+	
+	@ResponseBody
+	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_ATTRIBUTE_ID + ConstantPages.PAGE_FLAWS)
+	public ResponseEntity<Page<FlawsDTO>> findFlawsDtoById(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id) {
+		return ResponseEntity.ok(service.findFlawsDtoById(id));
 	}
 
 }

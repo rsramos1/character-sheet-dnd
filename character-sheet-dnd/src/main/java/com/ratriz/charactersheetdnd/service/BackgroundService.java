@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import com.ratriz.charactersheetdnd.domain.Background;
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
 import com.ratriz.charactersheetdnd.dto.BondsDTO;
+import com.ratriz.charactersheetdnd.dto.FlawsDTO;
+import com.ratriz.charactersheetdnd.dto.IdealsDTO;
+import com.ratriz.charactersheetdnd.dto.PersonalityTraitsDTO;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.repository.BackgroundRepository;
@@ -25,7 +28,16 @@ public class BackgroundService extends AbstractService<Background, Long> {
 	private BackgroundRepository repository;
 
 	@Autowired
+	private PersonalityTraitsService personalityTraitsService;
+
+	@Autowired
+	private IdealsService idealsService;
+	
+	@Autowired
 	private BondsService bondsService;
+	
+	@Autowired
+	private FlawsService flawsService;
 
 	@Override
 	protected JpaRepository<Background, Long> getRepository() {
@@ -59,8 +71,24 @@ public class BackgroundService extends AbstractService<Background, Long> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public Page<PersonalityTraitsDTO> findPersonalityTraitsDtoById(Long id) {
+		return (Page<PersonalityTraitsDTO>) personalityTraitsService
+				.findDto(Map.of(ConstantFilter.BACKGROUND_ID_EQUALS, id.toString()));
+	}
+
+	@SuppressWarnings("unchecked")
+	public Page<IdealsDTO> findIdealsDtoById(Long id) {
+		return (Page<IdealsDTO>) idealsService.findDto(Map.of(ConstantFilter.BACKGROUND_ID_EQUALS, id.toString()));
+	}
+
+	@SuppressWarnings("unchecked")
 	public Page<BondsDTO> findBondsDtoById(Long id) {
 		return (Page<BondsDTO>) bondsService.findDto(Map.of(ConstantFilter.BACKGROUND_ID_EQUALS, id.toString()));
+	}
+
+	@SuppressWarnings("unchecked")
+	public Page<FlawsDTO> findFlawsDtoById(Long id) {
+		return (Page<FlawsDTO>) flawsService.findDto(Map.of(ConstantFilter.BACKGROUND_ID_EQUALS, id.toString()));
 	}
 
 }
