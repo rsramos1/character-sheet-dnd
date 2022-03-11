@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ratriz.charactersheetdnd.domain.Subclass;
-import com.ratriz.charactersheetdnd.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.entity.Subclass;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 

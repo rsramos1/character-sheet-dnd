@@ -26,7 +26,7 @@ public final class ConstantPages {
 	public static final String PAGE_FLAWS = "/flaws";
 	public static final String PAGE_HAIR = "/hair";
 	public static final String PAGE_IDEALS = "/ideals";
-	public static final String PAGE_NAME = "/name";
+	public static final String PAGE_CHARACTER_NAME = "/character-name";
 	public static final String PAGE_PERSONALITY_TRAITS = "/personality-traits";
 	public static final String PAGE_RACE = "/race";
 	public static final String PAGE_SKIN = "/skin";

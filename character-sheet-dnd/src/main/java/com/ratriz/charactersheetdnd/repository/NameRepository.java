@@ -7,21 +7,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ratriz.charactersheetdnd.domain.Name;
-import com.ratriz.charactersheetdnd.dto.NameDTO;
+import com.ratriz.charactersheetdnd.domain.dto.CharacterNameDTO;
+import com.ratriz.charactersheetdnd.domain.entity.CharacterName;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 
 @Repository
-public interface NameRepository extends JpaRepository<Name, Long> {
+public interface NameRepository extends JpaRepository<CharacterName, Long> {
 
-	default Page<Name> findByInactive(boolean inactive) {
+	default Page<CharacterName> findByInactive(boolean inactive) {
 		return findByInactive(inactive, ConstantPages.PAGE_REQUEST);
 	}
 
-	public Page<Name> findByInactive(boolean inactive, Pageable pageRequest);
+	public Page<CharacterName> findByInactive(boolean inactive, Pageable pageRequest);
 
-	default Page<Name> find(
+	default Page<CharacterName> find(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.GENDER_EQUALS) Character genderEq,
@@ -34,7 +34,7 @@ public interface NameRepository extends JpaRepository<Name, Long> {
 			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(NM.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
 			+ "AND (:" + ConstantFilter.GENDER_EQUALS + " is null or NM.gender = :" + ConstantFilter.GENDER_EQUALS + ")"
 			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or NM.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
-	public Page<Name> find(
+	public Page<CharacterName> find(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.GENDER_EQUALS) Character genderEq,
@@ -52,7 +52,7 @@ public interface NameRepository extends JpaRepository<Name, Long> {
 			@Param(ConstantFilter.GENDER_EQUALS) Character genderEq,
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactive);
 	
-	default Page<NameDTO> findDto(
+	default Page<CharacterNameDTO> findDto(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.GENDER_EQUALS) Character genderEq,
@@ -60,7 +60,7 @@ public interface NameRepository extends JpaRepository<Name, Long> {
 		return find(idNe, nameLk, genderEq, inactive).map(obj -> obj.toDTO());
 	}
 
-	default Page<NameDTO> findDto(
+	default Page<CharacterNameDTO> findDto(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
 			@Param(ConstantFilter.GENDER_EQUALS) Character genderEq,

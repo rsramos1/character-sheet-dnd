@@ -39,10 +39,7 @@ public class ParseUtil {
 	}
 
 	public static Character parseCharacterOrDefault(String value, Character defaultValue) {
-		if (StringUtils.length(value) != 1) {
-			throw new IllegalArgumentException(); // TODO create exception
-		}
-		return value.charAt(0);
+		return StringUtils.length(value) != 1 ? defaultValue : value.charAt(0);
 	}
 
 	public static Boolean parseBoolean(String value) {

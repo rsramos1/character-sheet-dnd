@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ratriz.charactersheetdnd.domain.AbstractEntity;
-import com.ratriz.charactersheetdnd.dto.IDTO;
+import com.ratriz.charactersheetdnd.domain.dto.IDTO;
+import com.ratriz.charactersheetdnd.domain.entity.AbstractEntity;
 import com.ratriz.charactersheetdnd.exception.ObjectNotFoundException;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
-import com.ratriz.charactersheetdnd.dto.BondsDTO;
+import com.ratriz.charactersheetdnd.domain.dto.BackgroundDTO;
+import com.ratriz.charactersheetdnd.domain.dto.BondsDTO;
 
 @Service
 public class DBService {

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ratriz.charactersheetdnd.domain.AbstractEntity;
-import com.ratriz.charactersheetdnd.dto.IDTO;
+import com.ratriz.charactersheetdnd.domain.dto.IDTO;
+import com.ratriz.charactersheetdnd.domain.entity.AbstractEntity;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
 

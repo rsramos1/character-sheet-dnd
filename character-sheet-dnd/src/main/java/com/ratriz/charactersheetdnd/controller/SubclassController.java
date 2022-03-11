@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ratriz.charactersheetdnd.domain.Subclass;
-import com.ratriz.charactersheetdnd.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.entity.Subclass;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.SubclassService;

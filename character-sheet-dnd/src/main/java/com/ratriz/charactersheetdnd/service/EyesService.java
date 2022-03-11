@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.domain.Eyes;
-import com.ratriz.charactersheetdnd.dto.EyesDTO;
+import com.ratriz.charactersheetdnd.domain.dto.EyesDTO;
+import com.ratriz.charactersheetdnd.domain.entity.Eyes;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.repository.EyesRepository;

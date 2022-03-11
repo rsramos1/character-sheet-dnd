@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ratriz.charactersheetdnd.domain.Name;
-import com.ratriz.charactersheetdnd.dto.NameDTO;
+import com.ratriz.charactersheetdnd.domain.dto.CharacterNameDTO;
+import com.ratriz.charactersheetdnd.domain.entity.CharacterName;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.NameService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_NAME)
-public class NameController extends AbstractController<Name, Long> {
+@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_CHARACTER_NAME)
+public class NameController extends AbstractController<CharacterName, Long> {
 
 	@Autowired
 	private NameService service;
 
 	@Override
-	protected AbstractService<Name, Long> getService() {
+	protected AbstractService<CharacterName, Long> getService() {
 		return service;
 	}
 
 	@ResponseBody
 	@PostMapping(path = ConstantPages.PAGE_ACTION)
-	public ResponseEntity<NameDTO> insert(@RequestBody NameDTO dto) {
+	public ResponseEntity<CharacterNameDTO> insert(@RequestBody CharacterNameDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
 	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
-	public ResponseEntity<NameDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id, @RequestBody NameDTO dto) {
+	public ResponseEntity<CharacterNameDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id, @RequestBody CharacterNameDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));
 	}
 

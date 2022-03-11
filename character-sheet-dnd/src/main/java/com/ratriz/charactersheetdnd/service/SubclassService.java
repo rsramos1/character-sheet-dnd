@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import com.ratriz.charactersheetdnd.domain.Subclass;
-import com.ratriz.charactersheetdnd.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.dto.SubclassDTO;
+import com.ratriz.charactersheetdnd.domain.entity.Subclass;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.repository.SubclassRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;

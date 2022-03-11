@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ratriz.charactersheetdnd.domain.Bonds;
-import com.ratriz.charactersheetdnd.dto.BondsDTO;
+import com.ratriz.charactersheetdnd.domain.dto.BondsDTO;
+import com.ratriz.charactersheetdnd.domain.entity.Bonds;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 
