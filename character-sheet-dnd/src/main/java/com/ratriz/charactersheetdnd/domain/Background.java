@@ -1,11 +1,13 @@
 package com.ratriz.charactersheetdnd.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.ratriz.charactersheetdnd.dto.BackgroundDTO;
 
@@ -25,17 +27,17 @@ public class Background extends AbstractEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long key;
 
-	@Column(nullable = false)
+	@NotBlank
 	private String name;
 
-	@Column(length = 2000)
+	@Length(max = 2000)
 	private String description;
 
 	@Override
 	public Long getId() {
 		return key;
 	}
-	
+
 	@Override
 	public void setId(Long id) {
 		this.key = id;

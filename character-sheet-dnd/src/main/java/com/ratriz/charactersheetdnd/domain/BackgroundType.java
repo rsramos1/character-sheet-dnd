@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.ratriz.charactersheetdnd.dto.FlawsDTO;
+import com.ratriz.charactersheetdnd.dto.BackgroundTypeDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Flaws extends AbstractEntity<Long> {
+public class BackgroundType extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -47,7 +47,7 @@ public class Flaws extends AbstractEntity<Long> {
 		this.key = id;
 	}
 
-	public Flaws(FlawsDTO dto) {
+	public BackgroundType(BackgroundTypeDTO dto) {
 		super(dto.inactive());
 		this.key = dto.key();
 		this.background = dto.background().toEntity();
@@ -57,8 +57,8 @@ public class Flaws extends AbstractEntity<Long> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public FlawsDTO toDTO() {
-		return new FlawsDTO(this);
+	public BackgroundTypeDTO toDTO() {
+		return new BackgroundTypeDTO(this);
 	}
 
 }

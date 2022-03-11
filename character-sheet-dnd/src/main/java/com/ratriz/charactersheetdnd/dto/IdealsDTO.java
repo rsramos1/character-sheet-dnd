@@ -6,7 +6,7 @@ public record IdealsDTO(Long key, BackgroundDTO background, String name, String 
 		implements IDTO<Ideals> {
 
 	public IdealsDTO(Long key) {
-		this(null, null, null);
+		this(key, null, null, null);
 	}
 
 	public IdealsDTO(BackgroundDTO background, String name, String description) {

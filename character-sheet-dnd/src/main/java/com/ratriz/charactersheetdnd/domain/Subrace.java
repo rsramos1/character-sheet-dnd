@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.ratriz.charactersheetdnd.dto.FlawsDTO;
+import com.ratriz.charactersheetdnd.dto.SubraceDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Flaws extends AbstractEntity<Long> {
+public class Subrace extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,7 +29,7 @@ public class Flaws extends AbstractEntity<Long> {
 	private Long key;
 
 	@ManyToOne(optional = false)
-	private Background background;
+	private Race race;
 
 	@NotBlank
 	private String name;
@@ -47,18 +47,18 @@ public class Flaws extends AbstractEntity<Long> {
 		this.key = id;
 	}
 
-	public Flaws(FlawsDTO dto) {
+	public Subrace(SubraceDTO dto) {
 		super(dto.inactive());
 		this.key = dto.key();
-		this.background = dto.background().toEntity();
+		this.race = dto.race().toEntity();
 		this.name = dto.name();
 		this.description = dto.description();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public FlawsDTO toDTO() {
-		return new FlawsDTO(this);
+	public SubraceDTO toDTO() {
+		return new SubraceDTO(this);
 	}
 
 }

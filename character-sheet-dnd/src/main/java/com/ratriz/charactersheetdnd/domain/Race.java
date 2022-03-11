@@ -1,16 +1,18 @@
 package com.ratriz.charactersheetdnd.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
-import com.ratriz.charactersheetdnd.dto.FlawsDTO;
+import com.ratriz.charactersheetdnd.dto.RaceDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,21 +23,48 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Flaws extends AbstractEntity<Long> {
+public class Race extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long key;
 
-	@ManyToOne(optional = false)
-	private Background background;
-
 	@NotBlank
 	private String name;
 
 	@Length(max = 2000)
 	private String description;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3)
+	private Integer minHeight;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3)
+	private Integer maxHeight;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3, scale = 2)
+	private Float minWeight;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3, scale = 2)
+	private Float maxWeight;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3)
+	private Integer minAge;
+
+	@NotNull
+	@Range(min = 0)
+	@Column(precision = 3)
+	private Integer maxAge;
 
 	@Override
 	public Long getId() {
@@ -47,18 +76,17 @@ public class Flaws extends AbstractEntity<Long> {
 		this.key = id;
 	}
 
-	public Flaws(FlawsDTO dto) {
+	public Race(RaceDTO dto) {
 		super(dto.inactive());
 		this.key = dto.key();
-		this.background = dto.background().toEntity();
 		this.name = dto.name();
 		this.description = dto.description();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public FlawsDTO toDTO() {
-		return new FlawsDTO(this);
+	public RaceDTO toDTO() {
+		return new RaceDTO(this);
 	}
 
 }

@@ -6,17 +6,17 @@ public record BondsDTO(Long key, BackgroundDTO background, String name, String d
 		implements IDTO<Bonds> {
 
 	public BondsDTO(Long key) {
-		this(null, null, null);
+		this(key, null, null, null);
 	}
 
 	public BondsDTO(BackgroundDTO background, String name, String description) {
 		this(null, background, name, description);
 	}
-	
+
 	public BondsDTO(Long key, BackgroundDTO background, String name, String description) {
 		this(key, background, name, description, false);
 	}
-	
+
 	public BondsDTO(Bonds entity) {
 		this(entity.getKey(), entity.getBackground().toDTO(), entity.getName(), entity.getDescription(),
 				entity.isInactive());

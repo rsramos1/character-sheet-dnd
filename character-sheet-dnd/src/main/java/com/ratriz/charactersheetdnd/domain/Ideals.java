@@ -1,12 +1,14 @@
 package com.ratriz.charactersheetdnd.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.ratriz.charactersheetdnd.dto.IdealsDTO;
 
@@ -29,10 +31,10 @@ public class Ideals extends AbstractEntity<Long> {
 	@ManyToOne(optional = false)
 	private Background background;
 
-	@Column(nullable = false)
+	@NotBlank
 	private String name;
 
-	@Column(length = 2000)
+	@Length(max = 2000)
 	private String description;
 
 	@Override

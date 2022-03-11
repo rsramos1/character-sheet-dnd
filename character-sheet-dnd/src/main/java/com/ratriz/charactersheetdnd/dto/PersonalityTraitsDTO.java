@@ -6,7 +6,7 @@ public record PersonalityTraitsDTO(Long key, BackgroundDTO background, String na
 		boolean inactive) implements IDTO<PersonalityTraits> {
 
 	public PersonalityTraitsDTO(Long key) {
-		this(null, null, null);
+		this(key, null, null, null);
 	}
 
 	public PersonalityTraitsDTO(BackgroundDTO background, String name, String description) {
