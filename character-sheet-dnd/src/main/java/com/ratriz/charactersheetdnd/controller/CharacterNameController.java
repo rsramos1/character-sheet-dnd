@@ -14,14 +14,14 @@ import com.ratriz.charactersheetdnd.domain.dto.CharacterNameDTO;
 import com.ratriz.charactersheetdnd.domain.entity.CharacterName;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 import com.ratriz.charactersheetdnd.service.AbstractService;
-import com.ratriz.charactersheetdnd.service.NameService;
+import com.ratriz.charactersheetdnd.service.CharacterNameService;
 
 @RestController
 @RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_CHARACTER_NAME)
-public class NameController extends AbstractController<CharacterName, Long> {
+public class CharacterNameController extends AbstractController<CharacterName, Long> {
 
 	@Autowired
-	private NameService service;
+	private CharacterNameService service;
 
 	@Override
 	protected AbstractService<CharacterName, Long> getService() {

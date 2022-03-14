@@ -1,12 +1,16 @@
 package com.ratriz.charactersheetdnd.domain.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -36,6 +40,10 @@ public class Bonds extends AbstractEntity<Long> {
 
 	@Length(max = 2000)
 	private String description;
+
+	@NotEmpty
+	@ManyToMany
+	private List<Alignment> alignments = List.of();
 
 	@Override
 	public Long getId() {

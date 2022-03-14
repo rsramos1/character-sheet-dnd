@@ -13,7 +13,7 @@ import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
 
 @Repository
-public interface NameRepository extends JpaRepository<CharacterName, Long> {
+public interface CharacterNameRepository extends JpaRepository<CharacterName, Long> {
 
 	default Page<CharacterName> findByInactive(boolean inactive) {
 		return findByInactive(inactive, ConstantPages.PAGE_REQUEST);
@@ -29,11 +29,11 @@ public interface NameRepository extends JpaRepository<CharacterName, Long> {
 		return find(idNe, nameLk, genderEq, inactive, ConstantPages.PAGE_REQUEST);
 	}
 
-	@Query("SELECT DISTINCT NM FROM Name NM "
-			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or NM.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
-			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(NM.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
-			+ "AND (:" + ConstantFilter.GENDER_EQUALS + " is null or NM.gender = :" + ConstantFilter.GENDER_EQUALS + ")"
-			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or NM.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
+	@Query("SELECT DISTINCT CN FROM CharacterName CN "
+			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or CN.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(CN.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
+			+ "AND (:" + ConstantFilter.GENDER_EQUALS + " is null or CN.gender = :" + ConstantFilter.GENDER_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or CN.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
 	public Page<CharacterName> find(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,
@@ -41,11 +41,11 @@ public interface NameRepository extends JpaRepository<CharacterName, Long> {
 			@Param(ConstantFilter.INACTIVE_EQUALS) Boolean inactiveEq,
 			Pageable pageRequest);
 
-	@Query("SELECT COUNT(NM) FROM Name NM "
-			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or NM.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
-			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(NM.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
-			+ "AND (:" + ConstantFilter.GENDER_EQUALS + " is null or NM.gender = :" + ConstantFilter.GENDER_EQUALS + ")"
-			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or NM.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
+	@Query("SELECT COUNT(CN) FROM CharacterName CN "
+			+ "WHERE (:" + ConstantFilter.ID_NOT_EQUALS + " is null or CN.id != :" + ConstantFilter.ID_NOT_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.NAME_LIKE + " is null or LOWER(CN.name) LIKE %:" + ConstantFilter.NAME_LIKE + "%)"
+			+ "AND (:" + ConstantFilter.GENDER_EQUALS + " is null or CN.gender = :" + ConstantFilter.GENDER_EQUALS + ")"
+			+ "AND (:" + ConstantFilter.INACTIVE_EQUALS + " is null or CN.inactive = :" + ConstantFilter.INACTIVE_EQUALS + ")")
 	public Long countByFilter(
 			@Param(ConstantFilter.ID_NOT_EQUALS) Long idNe,
 			@Param(ConstantFilter.NAME_LIKE) String nameLk,

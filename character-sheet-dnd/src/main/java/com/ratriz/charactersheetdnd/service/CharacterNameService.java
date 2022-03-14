@@ -14,14 +14,14 @@ import com.ratriz.charactersheetdnd.domain.dto.CharacterNameDTO;
 import com.ratriz.charactersheetdnd.domain.entity.CharacterName;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantFilter;
 import com.ratriz.charactersheetdnd.infrastructure.ConstantPages;
-import com.ratriz.charactersheetdnd.repository.NameRepository;
+import com.ratriz.charactersheetdnd.repository.CharacterNameRepository;
 import com.ratriz.charactersheetdnd.util.ParseUtil;
 
 @Service
-public class NameService extends AbstractService<CharacterName, Long> {
+public class CharacterNameService extends AbstractService<CharacterName, Long> {
 
 	@Autowired
-	private NameRepository repository;
+	private CharacterNameRepository repository;
 
 	@Override
 	protected JpaRepository<CharacterName, Long> getRepository() {

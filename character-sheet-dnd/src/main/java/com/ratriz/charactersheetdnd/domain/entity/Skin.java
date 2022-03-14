@@ -1,11 +1,15 @@
 package com.ratriz.charactersheetdnd.domain.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import com.ratriz.charactersheetdnd.domain.dto.SkinDTO;
 
@@ -27,6 +31,10 @@ public class Skin extends AbstractEntity<Long> {
 
 	@NotBlank
 	private String name;
+
+	@NotEmpty
+	@ManyToMany
+	private List<Subrace> subraces = List.of();
 
 	@Override
 	public Long getId() {

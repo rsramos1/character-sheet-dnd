@@ -1,25 +1,29 @@
 package com.ratriz.charactersheetdnd.domain.dto;
 
+import java.util.List;
+
+import com.ratriz.charactersheetdnd.domain.entity.Alignment;
 import com.ratriz.charactersheetdnd.domain.entity.PersonalityTraits;
 
 public record PersonalityTraitsDTO(Long key, BackgroundDTO background, String name, String description,
-		boolean inactive) implements IDTO<PersonalityTraits> {
+		List<Alignment> alignments, boolean inactive) implements IDTO<PersonalityTraits> {
 
 	public PersonalityTraitsDTO(Long key) {
-		this(key, null, null, null);
+		this(key, null, null, null, null);
 	}
 
-	public PersonalityTraitsDTO(BackgroundDTO background, String name, String description) {
-		this(null, background, name, description);
+	public PersonalityTraitsDTO(BackgroundDTO background, String name, String description, List<Alignment> alignments) {
+		this(null, background, name, description, alignments);
 	}
 
-	public PersonalityTraitsDTO(Long key, BackgroundDTO background, String name, String description) {
-		this(key, background, name, description, false);
+	public PersonalityTraitsDTO(Long key, BackgroundDTO background, String name, String description,
+			List<Alignment> alignments) {
+		this(key, background, name, description, alignments, false);
 	}
 
 	public PersonalityTraitsDTO(PersonalityTraits entity) {
 		this(entity.getKey(), entity.getBackground().toDTO(), entity.getName(), entity.getDescription(),
-				entity.isInactive());
+				entity.getAlignments(), entity.isInactive());
 	}
 
 	@Override

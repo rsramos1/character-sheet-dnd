@@ -1,23 +1,26 @@
 package com.ratriz.charactersheetdnd.domain.dto;
 
-import com.ratriz.charactersheetdnd.domain.entity.Eyes;
+import java.util.List;
 
-public record EyesDTO(Long key, String name, boolean inactive) implements IDTO<Eyes> {
+import com.ratriz.charactersheetdnd.domain.entity.Eyes;
+import com.ratriz.charactersheetdnd.domain.entity.Subrace;
+
+public record EyesDTO(Long key, String name, List<Subrace> subraces, boolean inactive) implements IDTO<Eyes> {
 
 	public EyesDTO(Long key) {
-		this(key, null);
+		this(key, null, null);
 	}
 
-	public EyesDTO(String name) {
-		this(null, name);
+	public EyesDTO(String name, List<Subrace> subraces) {
+		this(null, name, subraces);
 	}
 
-	public EyesDTO(Long key, String name) {
-		this(key, name, false);
+	public EyesDTO(Long key, String name, List<Subrace> subraces) {
+		this(key, name, subraces, false);
 	}
 
 	public EyesDTO(Eyes entity) {
-		this(entity.getKey(), entity.getName(), entity.isInactive());
+		this(entity.getKey(), entity.getName(), entity.getSubraces(), entity.isInactive());
 	}
 
 	@Override

@@ -33,6 +33,8 @@ public class Background extends AbstractEntity<Long> {
 	@Length(max = 2000)
 	private String description;
 
+	private String backgroundType;
+
 	@Override
 	public Long getId() {
 		return key;

@@ -1,23 +1,27 @@
 package com.ratriz.charactersheetdnd.domain.dto;
 
-import com.ratriz.charactersheetdnd.domain.entity.FamilyName;
+import java.util.List;
 
-public record FamilyNameDTO(Long key, String name, boolean inactive) implements IDTO<FamilyName> {
+import com.ratriz.charactersheetdnd.domain.entity.FamilyName;
+import com.ratriz.charactersheetdnd.domain.entity.Subrace;
+
+public record FamilyNameDTO(Long key, String name, List<Subrace> subraces, boolean inactive)
+		implements IDTO<FamilyName> {
 
 	public FamilyNameDTO(Long key) {
-		this(key, null);
+		this(key, null, null);
 	}
 
-	public FamilyNameDTO(String name) {
-		this(null, name);
+	public FamilyNameDTO(String name, List<Subrace> subraces) {
+		this(null, name, subraces);
 	}
 
-	public FamilyNameDTO(Long key, String name) {
-		this(key, name, false);
+	public FamilyNameDTO(Long key, String name, List<Subrace> subraces) {
+		this(key, name, subraces, false);
 	}
 
 	public FamilyNameDTO(FamilyName entity) {
-		this(entity.getKey(), entity.getName(), entity.isInactive());
+		this(entity.getKey(), entity.getName(), entity.getSubraces(), entity.isInactive());
 	}
 
 	@Override
