@@ -40,7 +40,7 @@ public abstract class AbstractService<T extends AbstractEntity<K>, K> {
 
 	@SuppressWarnings("unchecked")
 	public <U extends IDTO<T>> U update(K id, IDTO<T> dto) {
-		if (!getRepository().existsById(id)) {
+		if (!existsById(id)) {
 			throw new ObjectNotFoundException();
 		}
 		return (U) save(Optional.of(dto.toEntity()).map(entity -> {

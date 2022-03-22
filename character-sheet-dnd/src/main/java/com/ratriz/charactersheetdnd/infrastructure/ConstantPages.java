@@ -33,6 +33,7 @@ public final class ConstantPages {
 	public static final String ROUTE_SUBCLASS = "/subclass";
 	public static final String ROUTE_SUBRACE = "/subrace";
 	public static final String ROUTE_USER = "/user";
+	public static final String ROUTE_CHARACTER_SHEET = "/character-sheet";
 
 	public static final String ROUTE_DTO = "/dto";
 	public static final String ROUTE_LIST = "/list";
@@ -43,6 +44,7 @@ public final class ConstantPages {
 	public static final String ROUTE_LOGIN = "/login";
 	public static final String ROUTE_SIGN_UP = "/signUp";
 	public static final String ROUTE_CHANGE_PASSWORD = "/change-password";
+	public static final String ROUTE_GENERATE = "/generate";
 
 	public static final String ATTRIBUTE_ID = "id";
 
