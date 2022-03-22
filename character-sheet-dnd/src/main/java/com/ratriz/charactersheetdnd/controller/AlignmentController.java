@@ -17,7 +17,7 @@ import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.AlignmentService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_ALIGNMENT)
+@RequestMapping(ConstantPages.ROUTE_API + ConstantPages.ROUTE_ALIGNMENT)
 public class AlignmentController extends AbstractController<Alignment, Long> {
 
 	@Autowired
@@ -29,13 +29,13 @@ public class AlignmentController extends AbstractController<Alignment, Long> {
 	}
 
 	@ResponseBody
-	@PostMapping(path = ConstantPages.PAGE_ACTION)
+	@PostMapping(path = ConstantPages.ROUTE_ACTION)
 	public ResponseEntity<AlignmentDTO> insert(@RequestBody AlignmentDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@PutMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<AlignmentDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id, @RequestBody AlignmentDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));
 	}

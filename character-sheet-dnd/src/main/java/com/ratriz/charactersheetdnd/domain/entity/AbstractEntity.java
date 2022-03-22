@@ -19,7 +19,9 @@ import lombok.Setter;
 public abstract class AbstractEntity<K> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@ColumnDefault("CURRENT_TIMESTAMP")
+	protected static final String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
+
+	@ColumnDefault(CURRENT_TIMESTAMP)
 	private LocalDateTime lastUpdate;
 
 	@ColumnDefault("false")

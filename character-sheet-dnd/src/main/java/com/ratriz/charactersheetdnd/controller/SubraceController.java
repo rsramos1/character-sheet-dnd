@@ -17,7 +17,7 @@ import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.SubraceService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_SUBRACE)
+@RequestMapping(ConstantPages.ROUTE_API + ConstantPages.ROUTE_SUBRACE)
 public class SubraceController extends AbstractController<Subrace, Long> {
 
 	@Autowired
@@ -29,13 +29,13 @@ public class SubraceController extends AbstractController<Subrace, Long> {
 	}
 
 	@ResponseBody
-	@PostMapping(path = ConstantPages.PAGE_ACTION)
+	@PostMapping(path = ConstantPages.ROUTE_ACTION)
 	public ResponseEntity<SubraceDTO> insert(@RequestBody SubraceDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@PutMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<SubraceDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id,
 			@RequestBody SubraceDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));

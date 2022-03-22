@@ -24,38 +24,38 @@ public abstract class AbstractController<T extends AbstractEntity<K>, K> {
 	protected abstract AbstractService<T, K> getService();
 
 	@ResponseBody
-	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_LIST)
+	@GetMapping(path = ConstantPages.ROUTE_DTO + ConstantPages.ROUTE_LIST)
 	public ResponseEntity<Page<IDTO<T>>> findAllDto() {
 		return ResponseEntity.ok(getService().findAllDto(ConstantPages.PAGE_REQUEST_ORDER_NAME));
 	}
 
 	@ResponseBody
-	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@GetMapping(path = ConstantPages.ROUTE_DTO + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<IDTO<T>> findByIdDto(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
 		return ResponseEntity.ok(getService().findByIdDto(id));
 	}
 
 	@ResponseBody
-	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_LIST + ConstantPages.PAGE_SEARCH)
+	@GetMapping(path = ConstantPages.ROUTE_DTO + ConstantPages.ROUTE_LIST + ConstantPages.ROUTE_SEARCH)
 	public ResponseEntity<Page<? extends IDTO<T>>> findDto(@RequestParam Map<String, String> params,
 			Pageable pageRequest) {
 		return ResponseEntity.ok(getService().findDto(params, pageRequest));
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_CHANGE_STATUS + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@PutMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_CHANGE_STATUS + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<IDTO<T>> changeStatus(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
 		return ResponseEntity.ok(getService().changeStatus(id));
 	}
 
 	@ResponseBody
-	@DeleteMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@DeleteMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<IDTO<T>> delete(@PathVariable(ConstantPages.ATTRIBUTE_ID) K id) {
 		return ResponseEntity.ok(getService().delete(id).toDTO());
 	}
 
 	@ResponseBody
-	@GetMapping(path = ConstantPages.PAGE_DTO + ConstantPages.PAGE_RANDOM)
+	@GetMapping(path = ConstantPages.ROUTE_DTO + ConstantPages.ROUTE_RANDOM)
 	public ResponseEntity<IDTO<T>> findOneRandom(@RequestParam Map<String, String> params, Pageable pageRequest) {
 		return ResponseEntity.ok(getService().findOneRandom(params));
 	}

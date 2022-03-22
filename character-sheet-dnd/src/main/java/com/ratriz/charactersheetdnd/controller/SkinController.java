@@ -17,7 +17,7 @@ import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.SkinService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_SKIN)
+@RequestMapping(ConstantPages.ROUTE_API + ConstantPages.ROUTE_SKIN)
 public class SkinController extends AbstractController<Skin, Long> {
 
 	@Autowired
@@ -29,13 +29,13 @@ public class SkinController extends AbstractController<Skin, Long> {
 	}
 
 	@ResponseBody
-	@PostMapping(path = ConstantPages.PAGE_ACTION)
+	@PostMapping(path = ConstantPages.ROUTE_ACTION)
 	public ResponseEntity<SkinDTO> insert(@RequestBody SkinDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@PutMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<SkinDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id, @RequestBody SkinDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));
 	}

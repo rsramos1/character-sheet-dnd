@@ -17,7 +17,7 @@ import com.ratriz.charactersheetdnd.service.AbstractService;
 import com.ratriz.charactersheetdnd.service.CharacterNameService;
 
 @RestController
-@RequestMapping(ConstantPages.PAGE_API + ConstantPages.PAGE_CHARACTER_NAME)
+@RequestMapping(ConstantPages.ROUTE_API + ConstantPages.ROUTE_CHARACTER_NAME)
 public class CharacterNameController extends AbstractController<CharacterName, Long> {
 
 	@Autowired
@@ -29,13 +29,13 @@ public class CharacterNameController extends AbstractController<CharacterName, L
 	}
 
 	@ResponseBody
-	@PostMapping(path = ConstantPages.PAGE_ACTION)
+	@PostMapping(path = ConstantPages.ROUTE_ACTION)
 	public ResponseEntity<CharacterNameDTO> insert(@RequestBody CharacterNameDTO dto) {
 		return ResponseEntity.ok(getService().insert(dto));
 	}
 
 	@ResponseBody
-	@PutMapping(path = ConstantPages.PAGE_ACTION + ConstantPages.PAGE_ATTRIBUTE_ID)
+	@PutMapping(path = ConstantPages.ROUTE_ACTION + ConstantPages.ROUTE_ATTRIBUTE_ID)
 	public ResponseEntity<CharacterNameDTO> update(@PathVariable(ConstantPages.ATTRIBUTE_ID) Long id, @RequestBody CharacterNameDTO dto) {
 		return ResponseEntity.ok(getService().update(id, dto));
 	}
